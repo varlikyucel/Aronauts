@@ -1,7 +1,7 @@
 # Aronauts 🐝 
 VR - XR Apllication for Aronauts Project (work in progress)
 
-Locate "SilkVR-UnityProject" in Unity Hub to start work on the project.
+Locate "Aronauts-UnityProject" in Unity Hub to start work on the project.
 
 # Version Control
 
