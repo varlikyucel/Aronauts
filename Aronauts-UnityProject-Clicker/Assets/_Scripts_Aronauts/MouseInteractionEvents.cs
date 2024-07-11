@@ -46,12 +46,12 @@ public class MouseInteractionEvents : MonoBehaviour
             {
                 if (previousHit != null)
                 {
-                    Debug.Log("Mouse exited: " + previousHit.name);
+                    //Debug.Log("Mouse exited: " + previousHit.name);
                     onMouseExit.Invoke(previousHit);
                 }
                 if (hit.transform == transform)
                 {
-                    Debug.Log("Mouse entered: " + hit.transform.name);
+                    //Debug.Log("Mouse entered: " + hit.transform.name);
                     onMouseEnter.Invoke(hit.transform);
                 }
                 previousHit = hit.transform;
@@ -67,7 +67,7 @@ public class MouseInteractionEvents : MonoBehaviour
         {
             if (previousHit != null)
             {
-                Debug.Log("Mouse exited: " + previousHit.name);
+                //Debug.Log("Mouse exited: " + previousHit.name);
                 onMouseExit.Invoke(previousHit);
                 previousHit = null;
             }

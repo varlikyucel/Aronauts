@@ -19,7 +19,7 @@ public class MaterialInteractionController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Debug.Log("OnMouseEnter called on " + gameObject.name);
+        //Debug.Log("OnMouseEnter called on " + gameObject.name);
         if (!isSelected)
         {
             meshRenderer.material = hoverMaterial;
@@ -28,7 +28,7 @@ public class MaterialInteractionController : MonoBehaviour
 
     private void OnMouseExit()
     {
-        Debug.Log("OnMouseExit called on " + gameObject.name);
+        //Debug.Log("OnMouseExit called on " + gameObject.name);
         if (!isSelected)
         {
             meshRenderer.material = defaultMaterial;
@@ -37,7 +37,7 @@ public class MaterialInteractionController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("OnMouseDown called on " + gameObject.name);
+        //Debug.Log("OnMouseDown called on " + gameObject.name);
         if (!isSelected)
         {
             StartCoroutine(ShowSelectedMaterial());

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ObjectInteractionController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ObjectInteractionController : MonoBehaviour
 
     public GameObject[] objectsToActivateOnSelection;
     public GameObject[] objectsToDeactivateOnSelection;
+    public float activationDelay = 0.5f;  // Delay in seconds
 
     private MeshRenderer meshRenderer;
     private bool isSelected = false;
@@ -20,7 +22,6 @@ public class ObjectInteractionController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Debug.Log("OnMouseEnter called on " + gameObject.name);
         if (!isSelected)
         {
             meshRenderer.material = hoverMaterial;
@@ -29,7 +30,6 @@ public class ObjectInteractionController : MonoBehaviour
 
     private void OnMouseExit()
     {
-        Debug.Log("OnMouseExit called on " + gameObject.name);
         if (!isSelected)
         {
             meshRenderer.material = defaultMaterial;
@@ -38,8 +38,6 @@ public class ObjectInteractionController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("OnMouseDown called on " + gameObject.name);
-
         InteractionManager interactionManager = FindObjectOfType<InteractionManager>();
         if (interactionManager != null)
         {
@@ -52,17 +50,8 @@ public class ObjectInteractionController : MonoBehaviour
         isSelected = false;
         meshRenderer.material = defaultMaterial;
 
-        // Deactivate specified objects
-        foreach (GameObject obj in objectsToActivateOnSelection)
-        {
-            obj.SetActive(false);
-        }
-
-        // Activate specified objects
-        foreach (GameObject obj in objectsToDeactivateOnSelection)
-        {
-            obj.SetActive(true);
-        }
+        // Start the coroutine to deactivate/activate objects after a delay
+        StartCoroutine(ChangeObjectActivation(false));
     }
 
     public void SetSelectedMaterial()
@@ -70,16 +59,41 @@ public class ObjectInteractionController : MonoBehaviour
         isSelected = true;
         meshRenderer.material = selectedMaterial;
 
-        // Activate specified objects
-        foreach (GameObject obj in objectsToActivateOnSelection)
-        {
-            obj.SetActive(true);
-        }
+        // Start the coroutine to deactivate/activate objects after a delay
+        StartCoroutine(ChangeObjectActivation(true));
+    }
 
-        // Deactivate specified objects
-        foreach (GameObject obj in objectsToDeactivateOnSelection)
+    private IEnumerator ChangeObjectActivation(bool isSelected)
+    {
+        yield return new WaitForSeconds(activationDelay); // Wait for the specified delay
+
+        if (isSelected)
         {
-            obj.SetActive(false);
+            // Activate specified objects
+            foreach (GameObject obj in objectsToActivateOnSelection)
+            {
+                obj.SetActive(true);
+            }
+
+            // Deactivate specified objects
+            foreach (GameObject obj in objectsToDeactivateOnSelection)
+            {
+                obj.SetActive(false);
+            }
+        }
+        else
+        {
+            // Deactivate specified objects
+            foreach (GameObject obj in objectsToActivateOnSelection)
+            {
+                obj.SetActive(false);
+            }
+
+            // Activate specified objects
+            foreach (GameObject obj in objectsToDeactivateOnSelection)
+            {
+                obj.SetActive(true);
+            }
         }
     }
 }

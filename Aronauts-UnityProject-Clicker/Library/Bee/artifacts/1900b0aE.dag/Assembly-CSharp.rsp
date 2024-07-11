@@ -399,6 +399,7 @@
 "Assets/_Scripts_Aronauts/MouseInteractionEvents.cs"
 "Assets/_Scripts_Aronauts/MoveObject.cs"
 "Assets/_Scripts_Aronauts/ObjectInteractionController.cs"
+"Assets/_Scripts_Aronauts/PositionAndCollisionManager.cs"
 "Assets/_Scripts_Aronauts/RotateObject.cs"
 -langversion:9.0
 
